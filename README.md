@@ -53,7 +53,7 @@ Optional requirements in case of NEXTCLOUD_GFARM_USE_GFARM_FOR_DATADIR=1:
 
 ## Target Versions
 
-- Nextcloud 23 to 31
+- Nextcloud 23 to 33
 - Gfarm 2.7.21 or later
 - Gfarm 2.8.x
 
