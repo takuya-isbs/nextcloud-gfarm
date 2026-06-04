@@ -41,6 +41,7 @@ class BackendGfarm extends Backend {
 class Gfarm extends BackendGfarm {
 
 	public const ID = 'gfarm';
+	protected $text;
 
 	protected function init(IL10N $l) {
 		$this->identifier = self::ID;
