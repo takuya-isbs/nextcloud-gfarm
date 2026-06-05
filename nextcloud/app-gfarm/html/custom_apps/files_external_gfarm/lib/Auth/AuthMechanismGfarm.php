@@ -61,7 +61,7 @@ class AuthMechanismGfarm extends AuthMechanism {
 	// }
 
 	// StorageModifierTrait
-	public function manipulateStorageConfig(StorageConfig &$storage, IUser $iuser = null) {
+	public function manipulateStorageConfig(StorageConfig &$storage, ?IUser $iuser = null) {
 		// $iuser (session user) is not used
 
 		$storage->setBackendOption('manipulated', true);
