@@ -11,10 +11,10 @@ location = /robots.txt {
     access_log off;
 }
 
-location /.well-known/carddav {
-    proxy_pass http://$server_name/remote.php/dav;
+location ^~ /.well-known/carddav {
+    return 301 $scheme://$http_host/remote.php/dav;
 }
 
-location /.well-known/caldav {
-    proxy_pass http://$server_name/remote.php/dav;
+location ^~ /.well-known/caldav {
+    return 301 $scheme://$http_host/remote.php/dav;
 }

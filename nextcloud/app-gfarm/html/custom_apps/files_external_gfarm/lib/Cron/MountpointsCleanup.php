@@ -61,7 +61,7 @@ class MountpointsCleanup extends TimedJob {
 
 	protected function run($arguments) {
 		$this->debug("start");
-		$service = \OC::$server->getGlobalStoragesService();
+		$service = \OC::$server->get(\OCA\Files_External\Service\GlobalStoragesService::class);
 		// OCA\Files_External\Lib\StorageConfig
 		$configs = $service->getStorageForAllUsers();
 

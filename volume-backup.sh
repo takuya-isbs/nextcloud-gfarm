@@ -31,6 +31,7 @@ WORKDIR=${TMPDIR}/${NAME}
 cd ${BASEDIR}
 
 mkdir ${WORKDIR}
+chmod 700 ${WORKDIR}
 
 make occ-maintenancemode-on
 
@@ -67,6 +68,18 @@ ${DOCKER} run --rm \
            --entrypoint tar \
            ${IMAGE} \
            cpf "/output/${NAME_TAR}" -C / ${NAME}
+${DOCKER} run --rm \
+           -v "${OUT_DIR}:/output" \
+           --workdir / \
+           --entrypoint chmod \
+           ${IMAGE} \
+           400 "/output/${NAME_TAR}"
+${DOCKER} run --rm \
+           -v "${OUT_DIR}:/output" \
+           --workdir / \
+           --entrypoint chown \
+           ${IMAGE} \
+           $(id -u) "/output/${NAME_TAR}"
 
 make occ-maintenancemode-off
 

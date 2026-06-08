@@ -53,7 +53,7 @@ Optional requirements in case of NEXTCLOUD_GFARM_USE_GFARM_FOR_DATADIR=1:
 
 ## Target Versions
 
-- Nextcloud 23 to 31
+- Nextcloud 23 to 33
 - Gfarm 2.7.21 or later
 - Gfarm 2.8.x
 
@@ -356,7 +356,7 @@ Nextcloud cannot be accessed during backup.
 
 ### Restore from LOCAL-BACKUP
 
-- run `make down-REMOVE_VOLUMES` if needed.
+- run `make down-REMOVE_VOLUMES_ALL` if needed.
   - WARNING: Local database will be removed.
 - remove `./secrets/*` files and `config.env` if needed.
 - run `./volume-restore.sh <INPUT_FILE>`
@@ -382,7 +382,7 @@ NOTE: `./secrets/nextcloud_admin_password` is also used to encrypt the backup da
 
 Even if Nextcloud database is broken or lost, you can restore from backup:
 
-- run `make down-REMOVE_VOLUMES` if needed.
+- run `make down-REMOVE_VOLUMES_ALL` if needed.
   - WARNING: Local database will be removed.
 - deploy `certs`, `./secrets/*` files and `config.env` manually.
 - run `make reborn`

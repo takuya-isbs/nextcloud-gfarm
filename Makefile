@@ -96,6 +96,9 @@ volume-list-2:
 		-f '{{ range .Mounts }}{{ .Name }} {{ end }}' \
 	 | xargs -n 1 echo
 
+volume-list-without-certs:
+	@$(MAKE) -s --no-print-directory volume-list | grep -v $(COMPOSE_PROJECT_NAME)_certs
+
 service-list:
 	@$(COMPOSE) config --services
 
@@ -112,11 +115,19 @@ _REINSTAL_FOR_DEVELOP:
 	$(MAKE) reborn-withlog
 
 down-REMOVE_VOLUMES_FORCE:
+	$(COMPOSE) down --remove-orphans
+	$(MAKE) -s --no-print-directory volume-list-without-certs | while text= read -r line; do $(DOCKER) volume rm "$$line"; done
+
+down-REMOVE_VOLUMES_ALL_FORCE:
 	$(COMPOSE) down --volumes --remove-orphans
 
 down-REMOVE_VOLUMES:
-	$(call yesno,ERASE ALL LOCAL DATA. Do you have a backup?)
+	$(call yesno,ERASE ALL LOCAL DATA without certs. Do you have a backup?)
 	$(MAKE) down-REMOVE_VOLUMES_FORCE
+
+down-REMOVE_VOLUMES_ALL:
+	$(call yesno,ERASE ALL LOCAL DATA. Do you have a backup?)
+	$(MAKE) down-REMOVE_VOLUMES_ALL_FORCE
 
 COMMIT_HASH := nextcloud/commit_hash.sh
 commit_hash:
